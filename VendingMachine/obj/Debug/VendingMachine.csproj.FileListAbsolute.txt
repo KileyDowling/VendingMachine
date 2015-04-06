@@ -1,0 +1,12 @@
+\\psf\Home\Desktop\raptor class projs in VS\VendingMachine\VendingMachine\bin\Debug\VendingMachine.exe.config
+\\psf\Home\Desktop\raptor class projs in VS\VendingMachine\VendingMachine\obj\Debug\VendingMachine.csprojResolveAssemblyReference.cache
+\\psf\Home\Desktop\raptor class projs in VS\VendingMachine\VendingMachine\bin\Debug\VendingMachine.exe
+\\psf\Home\Desktop\raptor class projs in VS\VendingMachine\VendingMachine\bin\Debug\VendingMachine.pdb
+\\psf\Home\Desktop\raptor class projs in VS\VendingMachine\VendingMachine\obj\Debug\VendingMachine.exe
+\\psf\Home\Desktop\raptor class projs in VS\VendingMachine\VendingMachine\obj\Debug\VendingMachine.pdb
+\\psf\Home\Desktop\VendingMachine\VendingMachine\bin\Debug\VendingMachine.exe.config
+\\psf\Home\Desktop\VendingMachine\VendingMachine\obj\Debug\VendingMachine.exe
+\\psf\Home\Desktop\VendingMachine\VendingMachine\obj\Debug\VendingMachine.pdb
+\\psf\Home\Desktop\VendingMachine\VendingMachine\bin\Debug\VendingMachine.exe
+\\psf\Home\Desktop\VendingMachine\VendingMachine\bin\Debug\VendingMachine.pdb
+\\psf\Home\Desktop\VendingMachine\VendingMachine\obj\Debug\VendingMachine.csprojResolveAssemblyReference.cache
