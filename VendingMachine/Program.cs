@@ -20,12 +20,13 @@ namespace VendingMachine
             //initiate new vending machine
             VendingMachine vendingUnlimited = new VendingMachine(0);
 
-            Console.WriteLine("Welcome to Vending Unlimited. We are happy to meet your all of your vending needs. Please submit your coins");
+            Console.WriteLine("Welcome to Vending Unlimited. We are happy to meet your all of your vending needs.");
 
             //request deposit
            while (userOneDeposit == 0)
            { 
             //accept initial deposit
+               Console.WriteLine("Please submit your coins");
             suserOneDeposit = Console.ReadLine();
 
             //convert initial deposit to double
@@ -49,59 +50,56 @@ namespace VendingMachine
 
 
             //if initial deposit is greater than 0
-            if (userOneDeposit > 0)
+            while (userOneDeposit > 0)
             {
                 //let user know how much they deposited
                 Console.WriteLine("You deposited $" + userOneDeposit + ". Please deposit more coins. Or select an item to purchase (gum, chips, soda). Or enter 'cancel' at any time for a refund");
-            }
 
-            //request more coins
-            smoreCoins = Console.ReadLine();
-            if (smoreCoins == "cancel")
-            {
-                vendingUnlimited.GetRefund();
-            }
-
-            else if (smoreCoins == "gum" || smoreCoins == "soda" || smoreCoins == "chips")
-            {
-                vendingUnlimited.Selection(smoreCoins);
-            }
-
-            else
-            {
-                moreCoins = Convert.ToDouble(smoreCoins);
-                moreCoins *= .01;
-                if (userOneDeposit > 0 && moreCoins >= 0)
+                smoreCoins = Console.ReadLine();
+                if (smoreCoins == "cancel" || smoreCoins == "refund")
                 {
-                    moreCoins += userOneDeposit;
-
-                    vendingUnlimited.AcceptMoreCoins(moreCoins);
-
-                    //request item to be purchase
-                    Console.WriteLine("What item would you like to purchase today? We have chips, soda, or gum.  You can also request a refund by entering 'cancel' or enter 'cost' to view a list of all options offered and their cost.");
-                    selectItem = Console.ReadLine();
-                    Console.WriteLine("You selected " + selectItem);
-
-                    //review selection, determine if user deposited enough money
-                    if (selectItem == "cost")
-                    {
-                        vendingUnlimited.GetCost();
-                        Console.WriteLine("Please select one of these options");
-                        selectItem = Console.ReadLine();
-                        vendingUnlimited.Selection(selectItem);
-                    }
-
-                    else
-                    {
-                        vendingUnlimited.Selection(selectItem);
-                    }
+                    vendingUnlimited.GetRefund();
+                    userOneDeposit = 0;
                 }
+
+                else if (smoreCoins == "gum" || smoreCoins == "soda" || smoreCoins == "chips")
+                {
+                    vendingUnlimited.Selection(smoreCoins);
+                    userOneDeposit = 0;
+                }
+
                 else
                 {
-                    Console.WriteLine("Error, invalid input. Program end");
+                    moreCoins = Convert.ToDouble(smoreCoins);
+                    moreCoins *= .01;
+                    while (userOneDeposit > 0 && moreCoins >= 0)
+                    {
+                        moreCoins += userOneDeposit;
 
+                        vendingUnlimited.AcceptMoreCoins(moreCoins);
+
+                        //request item to be purchase
+                        Console.WriteLine("What item would you like to purchase today? We have chips, soda, or gum.  You can also request a refund by entering 'cancel' or enter 'cost' to view a list of all options offered and their cost.");
+                        selectItem = Console.ReadLine();
+                        Console.WriteLine("You selected " + selectItem);
+
+                        //review selection, determine if user deposited enough money
+                        if (selectItem == "cost")
+                        {
+                            vendingUnlimited.GetCost();
+                            Console.WriteLine("Please select one of these options");
+                            selectItem = Console.ReadLine();
+                            vendingUnlimited.Selection(selectItem);
+                        }
+                        else
+                        {
+                            vendingUnlimited.Selection(selectItem);
+                        }
+            }
                 }
                 }
+            Console.WriteLine("Thank you for using Vending Unlimited. Good-Bye!");
+
                 Console.ReadLine();
             }
         }

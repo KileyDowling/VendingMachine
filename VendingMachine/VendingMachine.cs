@@ -104,7 +104,7 @@ namespace VendingMachine
             if (_depositedAmount >= 1.25)
             {
                 double changeAmount = _depositedAmount - 1.25;
-                Console.WriteLine("Your deposit was $" + _depositedAmount + ". That will get you chips (at a price of $1.25)! Your change is " + changeAmount + " cents. Thank you for your purchase! Good-Bye.");
+                Console.Write("Your deposit was $" + _depositedAmount + ". That will get you chips (at a price of $1.25)! Your change is $" + changeAmount + ".");
                 _depositedAmount = 0;
             }
 
@@ -121,7 +121,7 @@ namespace VendingMachine
             if(_depositedAmount >= .75)
             {
                 double changeAmount = _depositedAmount - .75;
-                Console.WriteLine("Your deposit was $" + _depositedAmount + ". That will get you a soda (at a price of  $.75)! Your change is " + changeAmount + " cents. Thank you for your purchase! Good-Bye");
+                Console.Write("Your deposit was $" + _depositedAmount + ". That will get you a soda (at a price of  $.75)! Your change is $" + changeAmount + ".");
                 _depositedAmount = 0;
             }
 
@@ -137,7 +137,7 @@ namespace VendingMachine
             if (_depositedAmount >= .50)
             {
                 double changeAmount = _depositedAmount - .50;
-                Console.WriteLine("Your deposit was $" + _depositedAmount + ". That will get you gum (at a price of $.50)! Your change is " + changeAmount + " cents. Thank you for your purchase! Good-Bye");
+                Console.Write("Your deposit was $" + _depositedAmount + ". That will get you gum (at a price of $.50)! Your change is $" + changeAmount + ".");
                 _depositedAmount = 0;
             }
 
@@ -183,7 +183,7 @@ namespace VendingMachine
             sinsertedCoins = Console.ReadLine();
             _depositedAmount = _depositedAmount + (Convert.ToDouble(sinsertedCoins) * .01);
 
-            while (_depositedAmount < 1.25)
+            while (_depositedAmount < .5)
             {
                 System.Console.WriteLine("You currently have $" + _depositedAmount + ". Please insert more coins. ISM");
                 snewCoin = Console.ReadLine();
@@ -192,10 +192,20 @@ namespace VendingMachine
                 _depositedAmount += newCoin;
             }
 
-            Console.WriteLine("You currently have " + _depositedAmount + ". Please make a selection");
+            Console.WriteLine("You currently have " + _depositedAmount + ". Please make a selection. Enter 'cost' to see a list of available items and their cost");
 
             selectedItem = Console.ReadLine();
-            Selection(selectedItem);
+            if (selectedItem == "cost")
+            {
+                GetCost();
+                selectedItem = Console.ReadLine();
+                Selection(selectedItem);
+            }
+
+            else
+            {
+                Selection(selectedItem);
+            }
         }
     }
 }
