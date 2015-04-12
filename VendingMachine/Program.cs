@@ -38,7 +38,8 @@ namespace VendingMachine
                 Console.WriteLine("Error. Deposit cannot be a negative number. Please try again");
                 userOneDeposit = 0;
             }
-
+            
+               //sets deposit to cents
             userOneDeposit *= .01;
             
            }
@@ -46,13 +47,10 @@ namespace VendingMachine
             //adds userOneDeposit if amount is greater than 0; otherwise resets deposit amount to 0
             vendingUnlimited.DepositCoin(userOneDeposit);
 
-            //question: at which point does it prompt user to input more coins?
-
-
             //if initial deposit is greater than 0
             while (userOneDeposit > 0)
             {
-                //let user know how much they deposited
+                //let user know how much they deposited, provide user opportunitiy to insert more coins, make a purchase, or get a refund
                 Console.WriteLine("You deposited $" + userOneDeposit + ". Please deposit more coins. Or select an item to purchase (gum, chips, soda). Or enter 'cancel' at any time for a refund");
 
                 smoreCoins = Console.ReadLine();
@@ -90,24 +88,19 @@ namespace VendingMachine
                             Console.WriteLine("Please select one of these options");
                             selectItem = Console.ReadLine();
                             vendingUnlimited.Selection(selectItem);
+                            userOneDeposit = 0;
                         }
                         else
                         {
                             vendingUnlimited.Selection(selectItem);
+                            userOneDeposit = 0;
                         }
-            }
+                    }
                 }
-                }
-            Console.WriteLine("Thank you for using Vending Unlimited. Good-Bye!");
+              }
+            Console.Write("Thank you for using Vending Unlimited. Good-Bye!");
 
                 Console.ReadLine();
             }
         }
     }
-//To be considered for the Interactive Programmer position, please complete the following programmer test and provide it for review prior to setting up an interview. This test should be written in Java or a similar language.
-
-//Create a software design for a basic vending machine. What are the functional components of the user interface? What are the possible states of the vending machine, and what are the transitions between those states? What are the functions of the vending machine? Create and submit written descriptions, flow charts, state diagrams, etc., as necessary to document your design. We're interested only in the functional design, not the visual/physical design.
-//Write Java code implementing the virtual vending machine you designed. Demonstrate your understanding of object-oriented design and good coding practices.
-//Write a command-line test program that allows a user to test your vending machine. The user should be able to see a list of snacks/prices, select a snack, put money into the machine, receive money back, etc.
-//In all of these tasks, focus on simplicity and thorough design. The design is intentionally open- ended.
-

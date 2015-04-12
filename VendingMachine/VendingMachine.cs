@@ -36,6 +36,7 @@ namespace VendingMachine
 
             else
             {
+                //add coins to initial deposit
                 _depositedAmount += coinAmount;
             }
         }
@@ -46,13 +47,13 @@ namespace VendingMachine
             _depositedAmount = additionalCoins;
             if (additionalCoins < 0)
             {
-                Console.WriteLine("Error, deposit cannot be a negative number.  ACM");
+                Console.WriteLine("Error, deposit cannot be a negative number.  AMC");
                 additionalCoins = 0;
             }
 
             while (_depositedAmount < .50)
             {
-                System.Console.WriteLine("You currently have $" + _depositedAmount + ". Please insert more coins. ACP");
+                System.Console.WriteLine("You currently have $" + _depositedAmount + ". Please insert more coins. AMC");
                 snewCoin = Console.ReadLine();
                 newCoin = Convert.ToDouble(snewCoin);
 
@@ -185,14 +186,14 @@ namespace VendingMachine
 
             while (_depositedAmount < .5)
             {
-                System.Console.WriteLine("You currently have $" + _depositedAmount + ". Please insert more coins. ISM");
+                System.Console.WriteLine("You currently have $" + _depositedAmount + ". Please insert more coins. IMC");
                 snewCoin = Console.ReadLine();
                 newCoin = Convert.ToDouble(snewCoin);
                 newCoin *= .01;
                 _depositedAmount += newCoin;
             }
 
-            Console.WriteLine("You currently have " + _depositedAmount + ". Please make a selection. Enter 'cost' to see a list of available items and their cost");
+            Console.WriteLine("You currently have $" + _depositedAmount + ". Please make a selection. Enter 'cost' to see a list of available items and their cost");
 
             selectedItem = Console.ReadLine();
             if (selectedItem == "cost")
