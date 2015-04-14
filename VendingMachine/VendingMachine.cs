@@ -105,13 +105,13 @@ namespace VendingMachine
             if (_depositedAmount >= 1.25)
             {
                 double changeAmount = _depositedAmount - 1.25;
-                Console.Write("Your deposit was $" + _depositedAmount + ". That will get you chips (at a price of $1.25)! Your change is $" + changeAmount + ".");
+                Console.Write("Your deposit was $" + _depositedAmount + ". That will get you chips (at a price of $1.25)! Your change is $" + changeAmount + ". ");
                 _depositedAmount = 0;
             }
 
             else
             {
-                Console.WriteLine("Unforunately, that is not enough to purchase food. You will need to insert more coins");
+                Console.WriteLine("Unforunately, that is not enough to purchase food. You will need to insert more coins. ");
                 InsertMoreCoins();
             }
         }
@@ -122,7 +122,7 @@ namespace VendingMachine
             if(_depositedAmount >= .75)
             {
                 double changeAmount = _depositedAmount - .75;
-                Console.Write("Your deposit was $" + _depositedAmount + ". That will get you a soda (at a price of  $.75)! Your change is $" + changeAmount + ".");
+                Console.Write("Your deposit was $" + _depositedAmount + ". That will get you a soda (at a price of  $.75)! Your change is $" + changeAmount + ". ");
                 _depositedAmount = 0;
             }
 
@@ -144,7 +144,7 @@ namespace VendingMachine
 
             else
             {
-                Console.WriteLine("Unforunately, that is not enough to purchase gum. You will need to insert more coins");
+                Console.WriteLine("Unforunately, that is not enough to purchase gum. You will need to insert more coins. ");
                 InsertMoreCoins();
             }
         }
@@ -153,7 +153,7 @@ namespace VendingMachine
         public void GetRefund()
         {
             double refundAmount = _depositedAmount;
-            Console.WriteLine("You were refunded $" + refundAmount);
+            Console.WriteLine("You were refunded $" + refundAmount + ". ");
             _depositedAmount = 0;
         }
 
