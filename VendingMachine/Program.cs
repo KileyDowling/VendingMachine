@@ -12,7 +12,7 @@ namespace VendingMachine
         {
             const string _EXIT = "exit";
 
-            string data;
+            string data = "";
             string suserOneDeposit;
             string selectItem;
             string smoreCoins;
@@ -20,16 +20,9 @@ namespace VendingMachine
             double userOneDeposit = 0;
             double moreCoins;
 
-
-            //Primer for loop
-            Console.WriteLine("Welcome to Vending Unlimited. We are happy to meet your all of your vending needs. Please enter an option:");
-            System.Console.WriteLine("Continue");
-            System.Console.WriteLine("Exit");
-
-            data = System.Console.ReadLine();
-
             while (data != _EXIT)
             {
+              Console.Write("Welcome to Vending Unlimited. We are happy to meet your all of your vending needs. ");
 
                 //initiate new vending machine
                 VendingMachine vendingUnlimited = new VendingMachine(0);
@@ -115,7 +108,7 @@ namespace VendingMachine
                 }
                 System.Console.WriteLine(" ");
                 System.Console.WriteLine("----------------------");
-                System.Console.WriteLine("Would you like to make another purchase? Please select an option:");
+                System.Console.WriteLine("Would you like to make another purchase? Please enter one of the following options:");
                 System.Console.WriteLine("Continue");
                 System.Console.WriteLine("Exit");
 
