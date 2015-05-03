@@ -9,6 +9,7 @@ namespace VendingMachine
     public class VendingMachine
     {
         private double _depositedAmount;
+        private double _depCoins = 0;
         public double additionalCoins = 0;
         public double newCoin = 0;
 
@@ -16,80 +17,65 @@ namespace VendingMachine
         public string sadditionalCoins = "";
         public string snewCoin = "";
         public string sinsertedCoins = "";
+        public bool InsertMoreCoins = false;
+
 
         //constructor that intializes the vending machine with an initial deposit 
-        public VendingMachine(double initialDeposit)
+        public VendingMachine(int initialDeposit)
         {
             _depositedAmount = initialDeposit;
         }
 
-        //deposit amount
-        public void DepositCoin (double coinAmount)
+        //deposit coins
+        public void DepositCoin(string coinAmount)
         {
-            if (coinAmount < 0)
-            {
-                // machine does not accept negative input
-                Console.WriteLine("Error, deposit cannot be a negative number. Please submit your coins. depositcoinmoethod");
-                coinAmount = 0;
-                _depositedAmount = coinAmount;
-            }
+                    //check user deposit and assign to coin amount
+                    switch (coinAmount)
+                    {
+                        case "1":
+                            _depCoins = .05;
+                            break;
+                        case "2":
+                            _depCoins = .10;
 
-            else
-            {
-                //add coins to initial deposit
-                _depositedAmount += coinAmount;
-            }
-        }
+                            break;
+                        case "3":
+                            _depCoins = .25;
 
-        //accept additional coins
-        public void AcceptMoreCoins (double additionalCoins)
-        {
-            _depositedAmount = additionalCoins;
-            if (additionalCoins < 0)
-            {
-                Console.WriteLine("Error, deposit cannot be a negative number.  AMC");
-                additionalCoins = 0;
-            }
+                            break;
+                        case "4":
+                            _depCoins = 1;
+                            break;
+                    }
 
-            while (_depositedAmount < .50)
-            {
-                System.Console.WriteLine("You currently have $" + _depositedAmount + ". Please insert more coins. AMC");
-                snewCoin = Console.ReadLine();
-                newCoin = Convert.ToDouble(snewCoin);
-
-                if (newCoin >= 0)
-                {
-                    additionalCoins += (newCoin * .01);
-                    _depositedAmount = additionalCoins;
-                    newCoin = 0;
+                    //add coins to initial deposit
+                    _depositedAmount += _depCoins;
                 }
 
-            }
-            Console.Write("You deposited $" + _depositedAmount + ". ");
+        public double currentDepositAmount() 
+        {
+            return _depositedAmount;
         }
-
+            
+        
         public void Selection(string selectedItem)
         {
-             switch (selectedItem)
+             switch (selectedItem.ToUpper())
              {
-                 case "chips":
+                 case "CHIPS":
                    GetFood();
                     break;
    
-                case "soda":
+                case "SODA":
                     GetDrink();
                     break;
 
 
-                case "gum":
+                case "GUM":
                     GetCandy();
                     break;
 
-                 case "cancel":
-                    GetRefund();
-                    break;
-
-                 case "refund":
+                 case "CANCEL":
                     GetRefund();
                     break;
 
@@ -102,17 +88,15 @@ namespace VendingMachine
 
         public void GetFood()
         {
-            if (_depositedAmount >= 1.25)
-            {
-                double changeAmount = _depositedAmount - 1.25;
-                Console.Write("Your deposit was $" + _depositedAmount + ". That will get you chips (at a price of $1.25)! Your change is $" + changeAmount + ". ");
-                _depositedAmount = 0;
-            }
+             double changeAmount = _depositedAmount - 1.25;
 
+            if(changeAmount >= 0)
+            {
+                _depositedAmount = changeAmount;
+            }
             else
             {
-                Console.WriteLine("Unforunately, that is not enough to purchase food. You will need to insert more coins. ");
-                InsertMoreCoins();
+                InsertMoreCoins = true;
             }
         }
 
@@ -122,14 +106,12 @@ namespace VendingMachine
             if(_depositedAmount >= .75)
             {
                 double changeAmount = _depositedAmount - .75;
-                Console.Write("Your deposit was $" + _depositedAmount + ". That will get you a soda (at a price of  $.75)! Your change is $" + changeAmount + ". ");
-                _depositedAmount = 0;
+                _depositedAmount = changeAmount;
             }
 
             else
             {
-                Console.WriteLine("Unforunately, that is not enough to purchase a drink. You will need to insert more coins");
-                InsertMoreCoins();
+                InsertMoreCoins = true;
             }
         }
 
@@ -137,15 +119,13 @@ namespace VendingMachine
         {
             if (_depositedAmount >= .50)
             {
-                double changeAmount = _depositedAmount - .50;
-                Console.Write("Your deposit was $" + _depositedAmount + ". That will get you gum (at a price of $.50)! Your change is $" + changeAmount + ".");
-                _depositedAmount = 0;
+                double changeAmount = _depositedAmount - .5;
+                _depositedAmount = changeAmount;
             }
 
             else
             {
-                Console.WriteLine("Unforunately, that is not enough to purchase gum. You will need to insert more coins. ");
-                InsertMoreCoins();
+                InsertMoreCoins = true;
             }
         }
 
@@ -153,10 +133,14 @@ namespace VendingMachine
         public void GetRefund()
         {
             double refundAmount = _depositedAmount;
-            Console.WriteLine("You were refunded $" + refundAmount + ". ");
-            _depositedAmount = 0;
+            Console.WriteLine(". You were refunded $" + refundAmount + ".");
+            resetDepositAmount();
         }
 
+        public void resetDepositAmount()
+        {
+            _depositedAmount = 0;
+        }
        
         public void GetCost()
         {
@@ -177,36 +161,6 @@ namespace VendingMachine
             gum.Price = .50;
             Console.WriteLine("Gum (" + gum.Name + "): $" + gum.Price);
         }
-
-        //if a user does not provide enough coins to make a purchase, they should be able to insert more
-        public void InsertMoreCoins ()
-        {
-            sinsertedCoins = Console.ReadLine();
-            _depositedAmount = _depositedAmount + (Convert.ToDouble(sinsertedCoins) * .01);
-
-            while (_depositedAmount < .5)
-            {
-                System.Console.WriteLine("You currently have $" + _depositedAmount + ". Please insert more coins. IMC");
-                snewCoin = Console.ReadLine();
-                newCoin = Convert.ToDouble(snewCoin);
-                newCoin *= .01;
-                _depositedAmount += newCoin;
-            }
-
-            Console.WriteLine("You currently have $" + _depositedAmount + ". Please make a selection. Enter 'cost' to see a list of available items and their cost");
-
-            selectedItem = Console.ReadLine();
-            if (selectedItem == "cost")
-            {
-                GetCost();
-                selectedItem = Console.ReadLine();
-                Selection(selectedItem);
-            }
-
-            else
-            {
-                Selection(selectedItem);
-            }
-        }
+            
     }
 }

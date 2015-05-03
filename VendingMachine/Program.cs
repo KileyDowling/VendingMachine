@@ -10,7 +10,7 @@ namespace VendingMachine
     {
         static void Main(string[] args)
         {
-            const string _EXIT = "exit";
+            const string  _EXIT = "B";
 
             string data = "";
 
@@ -36,34 +36,50 @@ namespace VendingMachine
                     //check if deposit is valid, add or reset deposit amount
                     vendingUnlimited.DepositCoin(userInput);
 
-                    Console.WriteLine("Your current deposit amount is ${0}, would you like to make a purchase?", vendingUnlimited.currentDepositAmount());
+                    Console.Write("Your current deposit amount is ${0}, would you like to make a purchase? ", vendingUnlimited.currentDepositAmount());
 
                     userInput = Console.ReadLine();
                     userInput = userInput.ToUpper();
                     while (userInput == "YES")
                     {    
-                        Console.WriteLine("What would you like to purchase? You can enter 'cost' to see our prices or 'cancel' to get a refund");
+                        Console.Write("What would you like to purchase? You can enter 'cost' to see our prices or 'cancel' to get a refund:  ");
                         string purchaseRequest = Console.ReadLine();
+                        purchaseRequest = purchaseRequest.ToUpper();
 
-                        if (purchaseRequest == "cost")
+                        if (purchaseRequest == "COST")
                         {
                             vendingUnlimited.GetCost();
-                            userInput = "";
-                            acceptCoins = false;
+                            acceptCoins = true;
                         }
                         else
                         {
+                            Console.Write("Your deposit was $" + vendingUnlimited.currentDepositAmount() + ". ");
                             vendingUnlimited.Selection(purchaseRequest);
+                            if (purchaseRequest == "CANCEL")
+                            {
+                                acceptCoins = false;
+                            }
+
+                            else if (vendingUnlimited.InsertMoreCoins == true)
+                            {
+                                Console.WriteLine("Unforunately, that is not enough to purchase a drink. You will need to insert more coins. ");
+                                vendingUnlimited.InsertMoreCoins = false;
+                            }
+                            else if (vendingUnlimited.currentDepositAmount() != 0)
+                            {
+                                Console.Write("That will get you " + purchaseRequest.ToLower() + "!" + " Your change is $" + vendingUnlimited.currentDepositAmount() + ".");
+                                acceptCoins = false;
+                            }
                             userInput = "";
-                            acceptCoins = false;
                         }
                     }
              
                 }
                 
-                System.Console.WriteLine("\n----------------------\nWould you like to make another purchase? Please enter one of the following options: \nContinue. \nExit");
+                System.Console.WriteLine("\n----------------------\nWould you like to make another purchase? Please enter one of the following options: \nA. Continue. \nB. Exit");
 
                 data = System.Console.ReadLine();
+                data = data.ToUpper();
 
                 if (data == _EXIT)
                 {
