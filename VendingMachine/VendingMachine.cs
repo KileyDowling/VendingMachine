@@ -18,6 +18,7 @@ namespace VendingMachine
         public string snewCoin = "";
         public string sinsertedCoins = "";
         public bool InsertMoreCoins = false;
+        public bool validInput = true;
 
 
         //constructor that intializes the vending machine with an initial deposit 
@@ -46,18 +47,23 @@ namespace VendingMachine
                         case "4":
                             _depCoins = 1;
                             break;
+
+                        default:
+                            validInput = false;
+                            break;
                     }
 
                     //add coins to initial deposit
                     _depositedAmount += _depCoins;
                 }
 
+        //get current deposit amount at any point in time
         public double currentDepositAmount() 
         {
             return _depositedAmount;
         }
             
-        
+        //allow selection of item from vending machine
         public void Selection(string selectedItem)
         {
              switch (selectedItem.ToUpper())
@@ -70,7 +76,6 @@ namespace VendingMachine
                     GetDrink();
                     break;
 
-
                 case "GUM":
                     GetCandy();
                     break;
@@ -80,8 +85,7 @@ namespace VendingMachine
                     break;
 
                  default:
-                    Console.WriteLine("Invalid selection. We don't offer what you entered");
-                    GetRefund();
+                    validInput = false;
                     break;
                }
         }
@@ -96,13 +100,13 @@ namespace VendingMachine
             }
             else
             {
+                //if deposited amount is not enough to cover price of item, allow user to insert more coins.
                 InsertMoreCoins = true;
             }
         }
 
         public void GetDrink()
         {
-           
             if(_depositedAmount >= .75)
             {
                 double changeAmount = _depositedAmount - .75;
@@ -111,6 +115,7 @@ namespace VendingMachine
 
             else
             {
+                //if deposited amount is not enough to cover price of item, allow user to insert more coins.
                 InsertMoreCoins = true;
             }
         }
@@ -125,6 +130,7 @@ namespace VendingMachine
 
             else
             {
+                //if deposited amount is not enough to cover price of item, allow user to insert more coins.
                 InsertMoreCoins = true;
             }
         }
@@ -133,7 +139,7 @@ namespace VendingMachine
         public void GetRefund()
         {
             double refundAmount = _depositedAmount;
-            Console.WriteLine(". You were refunded $" + refundAmount + ".");
+            Console.WriteLine("You were refunded ${0}.", refundAmount);
             resetDepositAmount();
         }
 
@@ -144,22 +150,25 @@ namespace VendingMachine
        
         public void GetCost()
         {
-            Console.WriteLine("We offer the best prices around!");
+            Console.WriteLine("\nWe offer the best prices around!");
 
             FoodItems chips = new FoodItems();
             chips.Name = "O'Lay";
             chips.Price = 1.25;
-            Console.WriteLine("Chips (" + chips.Name + "): $" + chips.Price);
+            Console.WriteLine("Chips ({0}): ${1}", chips.Name, chips.Price);
 
             FoodItems soda = new FoodItems();
             soda.Name = "Coke";
             soda.Price = .75;
-            Console.WriteLine("Soda (" + soda.Name + "): $" + soda.Price);
+            Console.WriteLine("Soda ({0}): ${1}", soda.Name, soda.Price);
 
             FoodItems gum = new FoodItems();
             gum.Name = "Orbit";
             gum.Price = .50;
-            Console.WriteLine("Gum (" + gum.Name + "): $" + gum.Price);
+            Console.WriteLine("Gum ({0}): ${1}\n", gum.Name, gum.Price);
+
+            Console.WriteLine("---");
+
         }
             
     }

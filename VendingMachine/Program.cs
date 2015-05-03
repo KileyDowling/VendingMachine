@@ -36,47 +36,72 @@ namespace VendingMachine
                     //check if deposit is valid, add or reset deposit amount
                     vendingUnlimited.DepositCoin(userInput);
 
-                    Console.Write("Your current deposit amount is ${0}, would you like to make a purchase? ", vendingUnlimited.currentDepositAmount());
+                    //while validInput, allow user to continue
+                    if (vendingUnlimited.validInput == true)
+                    {
+                        Console.Write("Your current deposit amount is ${0}, would you like to make a purchase? ", vendingUnlimited.currentDepositAmount());
 
-                    userInput = Console.ReadLine();
-                    userInput = userInput.ToUpper();
-                    while (userInput == "YES")
-                    {    
-                        Console.Write("What would you like to purchase? You can enter 'cost' to see our prices or 'cancel' to get a refund:  ");
-                        string purchaseRequest = Console.ReadLine();
-                        purchaseRequest = purchaseRequest.ToUpper();
-
-                        if (purchaseRequest == "COST")
+                        userInput = Console.ReadLine();
+                        userInput = userInput.ToUpper();
+                        while (userInput == "YES")
                         {
-                            vendingUnlimited.GetCost();
-                            acceptCoins = true;
-                        }
-                        else
-                        {
-                            Console.Write("Your deposit was $" + vendingUnlimited.currentDepositAmount() + ". ");
-                            vendingUnlimited.Selection(purchaseRequest);
-                            if (purchaseRequest == "CANCEL")
+                            Console.Write("\nWhat would you like to purchase? You can enter 'cost' to see our prices or 'cancel' to get a refund:  ");
+
+                            //accept user's purchase request
+                            string purchaseRequest = Console.ReadLine();
+                            purchaseRequest = purchaseRequest.ToUpper();
+
+                            if (purchaseRequest == "COST")
                             {
-                                acceptCoins = false;
+                                vendingUnlimited.GetCost();
+                                //allow user to make a purchase after viewing prices
+                                acceptCoins = true;
                             }
 
-                            else if (vendingUnlimited.InsertMoreCoins == true)
+                            else
                             {
-                                Console.WriteLine("Unforunately, that is not enough to purchase a drink. You will need to insert more coins. ");
-                                vendingUnlimited.InsertMoreCoins = false;
+                                vendingUnlimited.Selection(purchaseRequest);
+
+                                //if validInput is false, end program
+                                if (vendingUnlimited.validInput == false)
+                                {
+                                    Console.Write("\nInvalid input. Your deposit was ${0}. ", vendingUnlimited.currentDepositAmount());
+                                    vendingUnlimited.GetRefund();
+                                    userInput = "";
+                                    acceptCoins = false;
+                                }
+                                else
+                                {
+                                    if (purchaseRequest == "CANCEL")
+                                    {
+                                        //provide refund and return to main selection menu
+                                        acceptCoins = false;
+                                    }
+
+                                    else if (vendingUnlimited.InsertMoreCoins == true)
+                                    {
+                                        Console.Write("\nYour deposit was ${0}. ", vendingUnlimited.currentDepositAmount());
+                                        Console.WriteLine("You did not submit enough coins to purchase {0}. Please see below for a list of prices. \n", purchaseRequest.ToLower());
+                                        vendingUnlimited.GetCost();
+                                        //resets to false to allow another validation check once more coins have been submitted
+                                        vendingUnlimited.InsertMoreCoins = false;
+                                    }
+                                    //if user did not request a refund and inserted enough coins to make a purchase, provide purchased item and change
+                                    else if (vendingUnlimited.currentDepositAmount() != 0)
+                                    {
+                                        Console.WriteLine("That will get you {0}! Your change is ${1}.", purchaseRequest.ToLower(), vendingUnlimited.currentDepositAmount());
+                                        //returns to main selection menu
+                                        acceptCoins = false;
+                                    }
+                                    //exits loops
+                                    userInput = "";
+                                }
                             }
-                            else if (vendingUnlimited.currentDepositAmount() != 0)
-                            {
-                                Console.Write("That will get you " + purchaseRequest.ToLower() + "!" + " Your change is $" + vendingUnlimited.currentDepositAmount() + ".");
-                                acceptCoins = false;
-                            }
-                            userInput = "";
                         }
-                    }
-             
+                }
                 }
                 
-                System.Console.WriteLine("\n----------------------\nWould you like to make another purchase? Please enter one of the following options: \nA. Continue. \nB. Exit");
+                System.Console.WriteLine("\n----------------------\n\nWould you like to make another purchase? Please enter one of the following options: \nA. Continue. \nB. Exit");
 
                 data = System.Console.ReadLine();
                 data = data.ToUpper();
@@ -87,13 +112,11 @@ namespace VendingMachine
                 }
                 else
                 {
+                    //allow user to insert coins and possibly make a purchase
                     acceptCoins = true;
                 }
             }
-
             Console.ReadLine();
-
         }
-
     }
 }
