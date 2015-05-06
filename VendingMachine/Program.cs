@@ -65,8 +65,8 @@ namespace VendingMachine
                                 //if validInput is false, end program
                                 if (vendingUnlimited.validInput == false)
                                 {
-                                    Console.Write("\nInvalid input. Your deposit was ${0}. ", vendingUnlimited.currentDepositAmount());
-                                    vendingUnlimited.GetRefund();
+                                   string refundMsg = vendingUnlimited.GetRefund();
+                                   Console.WriteLine(refundMsg);
                                     userInput = "";
                                     acceptCoins = false;
                                 }
@@ -75,6 +75,8 @@ namespace VendingMachine
                                     if (purchaseRequest == "CANCEL")
                                     {
                                         //provide refund and return to main selection menu
+                                        string refundMsg = vendingUnlimited.GetRefund();
+                                        Console.WriteLine(refundMsg);
                                         acceptCoins = false;
                                     }
 

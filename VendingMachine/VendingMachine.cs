@@ -136,15 +136,17 @@ namespace VendingMachine
         }
 
 
-        public void GetRefund()
+        public string GetRefund()
         {
-            double refundAmount = _depositedAmount;
-            Console.WriteLine("You were refunded ${0}.", refundAmount);
+            //let user know they received a full refund and reset deposit amount
+            string refundMsg = "You received a full refund!";
             resetDepositAmount();
+            return refundMsg;
         }
 
         public void resetDepositAmount()
         {
+            //set deposit amount back to 0
             _depositedAmount = 0;
         }
        
@@ -165,11 +167,9 @@ namespace VendingMachine
             FoodItems gum = new FoodItems();
             gum.Name = "Orbit";
             gum.Price = .50;
-            Console.WriteLine("Gum ({0}): ${1}\n", gum.Name, gum.Price);
+            Console.WriteLine("Gum ({0}): ${1}", gum.Name, gum.Price);
 
             Console.WriteLine("---");
-
-        }
-            
+        }       
     }
 }
