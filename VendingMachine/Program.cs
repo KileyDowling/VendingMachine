@@ -39,7 +39,7 @@ namespace VendingMachine
                     //while validInput, allow user to continue
                     if (vendingUnlimited.validInput == true)
                     {
-                        Console.Write("Your current deposit amount is ${0}, would you like to make a purchase? ", vendingUnlimited.currentDepositAmount());
+                        Console.Write("\tYour current deposit amount is ${0}, would you like to make a purchase? ", vendingUnlimited.currentDepositAmount());
 
                         userInput = Console.ReadLine();
                         userInput = userInput.ToUpper();
@@ -82,7 +82,7 @@ namespace VendingMachine
 
                                     else if (vendingUnlimited.InsertMoreCoins == true)
                                     {
-                                        Console.Write("\nYour deposit was ${0}. ", vendingUnlimited.currentDepositAmount());
+                                        Console.Write("\n\tYour deposit was ${0}. ", vendingUnlimited.currentDepositAmount());
                                         Console.WriteLine("You did not submit enough coins to purchase {0}. Please see below for a list of prices. \n", purchaseRequest.ToLower());
                                         vendingUnlimited.GetCost();
                                         //resets to false to allow another validation check once more coins have been submitted
@@ -91,7 +91,7 @@ namespace VendingMachine
                                     //if user did not request a refund and inserted enough coins to make a purchase, provide purchased item and change
                                     else if (vendingUnlimited.currentDepositAmount() != 0)
                                     {
-                                        Console.WriteLine("That will get you {0}! Your change is ${1}.", purchaseRequest.ToLower(), vendingUnlimited.currentDepositAmount());
+                                        Console.WriteLine("\tThat will get you {0}! Your change is ${1}.", purchaseRequest.ToLower(), vendingUnlimited.currentDepositAmount());
                                         //returns to main selection menu
                                         acceptCoins = false;
                                     }
