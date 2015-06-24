@@ -20,7 +20,9 @@ namespace VendingMachine
 
             while (data != _EXIT)
             {
-              Console.Write("Welcome to Vending Unlimited. We are happy to meet your all of your vending needs. ");
+                Console.WriteLine("\n\t*****************************************************");
+                Console.Write("\t\t     Welcome to Vending Unlimited. \n\tWe are happy to meet your all of your vending needs! ");
+                Console.WriteLine("\n\t*****************************************************\n");
 
                 //initiate new vending machine
                 VendingMachine vendingUnlimited = new VendingMachine(0);

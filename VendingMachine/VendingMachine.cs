@@ -21,16 +21,13 @@ namespace VendingMachine
         public bool validInput = true;
 
 
-        //constructor that intializes the vending machine with an initial deposit 
         public VendingMachine(int initialDeposit)
         {
             _depositedAmount = initialDeposit;
         }
 
-        //deposit coins
         public void DepositCoin(string coinAmount)
         {
-                    //check user deposit and assign to coin amount
                     switch (coinAmount)
                     {
                         case "1":
